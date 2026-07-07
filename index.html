@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arga Rifky Nugraha &mdash; Venture Builder &amp; Startup Mentor</title>
+<title>Arga Rifky Nugraha | Ecosystem Architect &amp; Venture Builder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -324,6 +324,113 @@ footer { padding:36px 48px; border-top:1px solid var(--glass-border); display:fl
   position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
   font-size:12px; color:rgba(255,255,255,0.5); letter-spacing:2px;
 }
+
+/* ── HERO ENTRANCE ANIMATIONS ─────────────── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(28px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeRight {
+  from { opacity:0; transform:translateX(36px); }
+  to   { opacity:1; transform:translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity:0; transform:scale(0.92); }
+  to   { opacity:1; transform:scale(1); }
+}
+.hero-tag    { animation: fadeUp 0.7s ease 0.1s both; }
+.hero-title  { animation: fadeUp 0.7s ease 0.22s both; }
+.hero-sub    { animation: fadeUp 0.7s ease 0.34s both; }
+.hero-stats  { animation: fadeUp 0.7s ease 0.46s both; }
+.hero-ctas   { animation: fadeUp 0.7s ease 0.58s both; }
+.hero-photo-wrap { animation: fadeRight 0.9s ease 0.3s both; }
+
+/* ── FLOATING PARTICLES ─────────────── */
+.particles-wrap { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:1; }
+.p-dot {
+  position:absolute; border-radius:50%;
+  animation: floatDot linear infinite;
+  opacity:0;
+}
+@keyframes floatDot {
+  0%   { transform:translateY(100vh) scale(0); opacity:0; }
+  8%   { opacity:1; }
+  90%  { opacity:0.4; }
+  100% { transform:translateY(-60px) scale(1.4); opacity:0; }
+}
+
+/* ── COUNTER ANIMATION ─────────────── */
+@keyframes countUp {
+  from { opacity:0; transform:translateY(12px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.stat-num { animation: countUp 0.6s ease both; }
+
+/* ── SECTION LABEL SLIDE ─────────────── */
+.s-label { position:relative; display:inline-block; }
+.s-label::after {
+  content:""; position:absolute; bottom:-4px; left:0;
+  width:0; height:1px; background:var(--accent);
+  transition:width 0.6s ease;
+}
+.s-label.visible::after { width:100%; }
+
+/* ── SKILL CLUSTER GLOW ON HOVER ─────────────── */
+.skill-cluster { position:relative; overflow:hidden; }
+.skill-cluster::before {
+  content:""; position:absolute; inset:0; border-radius:20px;
+  background:radial-gradient(circle at 50% 0%, rgba(0,212,255,0.08) 0%, transparent 70%);
+  opacity:0; transition:opacity 0.4s ease;
+}
+.skill-cluster:hover::before { opacity:1; }
+
+/* ── TIMELINE DOT PULSE ─────────────── */
+.tdot { position:absolute; }
+.titem.visible .tdot::before {
+  content:""; position:absolute; inset:-6px;
+  border-radius:50%; border:1px solid var(--accent);
+  animation:dotPulse 2s ease infinite;
+}
+@keyframes dotPulse {
+  0%,100% { opacity:0.4; transform:scale(1); }
+  50%      { opacity:0; transform:scale(1.8); }
+}
+
+/* ── ABOUT CARD SHINE ─────────────── */
+.about-card { overflow:hidden; }
+.about-card::after {
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0) 60%);
+  transform:translateX(-100%);
+  transition:transform 0.6s ease;
+}
+.about-card:hover::after { transform:translateX(100%); }
+.about-card { position:relative; }
+
+/* ── PROJECT CARD TOP LINE GLOW ─────────────── */
+.project-card:hover::before {
+  box-shadow: 0 0 12px rgba(0,212,255,0.6);
+  height:3px;
+}
+
+/* ── CONTACT LINK ICON PULSE ─────────────── */
+.clink:hover .clink-ico {
+  animation: iconBounce 0.4s ease;
+}
+@keyframes iconBounce {
+  0%,100% { transform:scale(1); }
+  50%      { transform:scale(1.15); }
+}
+
+/* ── GRADIENT TEXT SHIMMER ─────────────── */
+.gradient-text {
+  background-size: 200% auto;
+  animation: shimmer 4s linear infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
 </style>
 </head>
 <body>
@@ -349,18 +456,19 @@ footer { padding:36px 48px; border-top:1px solid var(--glass-border); display:fl
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
+  <div class="particles-wrap" id="particlesWrap"></div>
   <div class="hero-content">
     <div>
-      <div class="hero-tag">Founder &middot; Mentor &middot; Builder</div>
+      <div class="hero-tag">Founder &middot; Mentor &middot; Builder &middot; Ecosystem Architect</div>
       <h1 class="hero-title">
         Arga Rifky<br>
         <span class="gradient-text">Nugraha</span>
       </h1>
-      <p class="hero-sub">Venture Ecosystem Orchestrator with 10+ years building Indonesia's startup ecosystem. Helping early-stage founders move from idea to market with clarity, conviction, and momentum.</p>
+      <p class="hero-sub">Building Indonesia's digital ecosystem, one founder at a time. 10+ years turning early-stage ideas into market-ready ventures, and connecting the dots between startups, corporations, universities, and communities to make innovation stick.</p>
       <div class="hero-stats">
-        <div><div class="stat-num">100<span class="plus">+</span></div><div class="stat-label">Startups Mentored</div></div>
-        <div><div class="stat-num">10<span class="plus">+</span></div><div class="stat-label">Years Experience</div></div>
-        <div><div class="stat-num">5<span class="plus">+</span></div><div class="stat-label">Major Programs Led</div></div>
+        <div><div class="stat-num"><span class="count-target" data-target="100">100</span><span class="plus">+</span></div><div class="stat-label">Founders Impacted</div></div>
+        <div><div class="stat-num"><span class="count-target" data-target="10">10</span><span class="plus">+</span></div><div class="stat-label">Years Experience</div></div>
+        <div><div class="stat-num"><span class="count-target" data-target="5">5</span><span class="plus">+</span></div><div class="stat-label">Major Programs Led</div></div>
       </div>
       <div class="hero-ctas">
         <a href="https://argarifky.github.io/interactive-career-path/" target="_blank" class="btn-primary">&#x25B6;&#xFE0F; Play Interactive Career Path</a>
@@ -381,15 +489,15 @@ footer { padding:36px 48px; border-top:1px solid var(--glass-border); display:fl
   <div class="inner about-grid">
     <div>
       <p class="s-label reveal">About Me</p>
-      <h2 class="s-title reveal">A Builder at Heart,<br>A Mentor by Purpose</h2>
-      <p class="s-desc reveal">Started as an Electrical Engineer, but what truly ignited me was the challenge of turning ideas into real businesses. For over a decade, I've been in the trenches building companies, running incubation programs, and guiding founders through the hardest parts of the startup journey.</p>
-      <p class="s-desc reveal" style="margin-top:10px">Through VAXA, I orchestrate a full startup ecosystem from venture building to acceleration, serving both regional and national founders with frameworks that actually work.</p>
+      <h2 class="s-title reveal">Architect of Ecosystems,<br>Catalyst for Founders</h2>
+      <p class="s-desc reveal">Started as an Electrical Engineer. Became a founder. Pivoted into building the infrastructure that helps other founders win. For over a decade, I've been deep in the work of startup incubation, venture building, and ecosystem development across Indonesia.</p>
+      <p class="s-desc reveal" style="margin-top:10px">Today, through VAXA and as Partnership Manager at Garuda Spark Innovation Hub, I connect the pieces of Indonesia's digital ecosystem: startups, corporations, universities, and communities. The mission isn't just building startups. It's building the ground they grow on.</p>
     </div>
     <div class="about-cards">
-      <div class="about-card reveal"><div class="card-icon">&#x1F3AF;</div><div class="card-title">What I Do</div><div class="card-desc">Design and run programs that turn raw founders into market-ready entrepreneurs, from ideation to investor readiness.</div></div>
-      <div class="about-card reveal"><div class="card-icon">&#x1F4A1;</div><div class="card-title">What Drives Me</div><div class="card-desc">The moment a founder gains clarity. That "click" when strategy meets execution is what fuels everything I do.</div></div>
-      <div class="about-card reveal"><div class="card-icon">&#x1F30F;</div><div class="card-title">Who I Am</div><div class="card-desc">Open-minded, growth-oriented problem solver. Grounded, honest, and always looking for the perspective that changes everything.</div></div>
-      <div class="about-card reveal"><div class="card-icon">&#x26A1;</div><div class="card-title">My Values</div><div class="card-desc">Clarity over complexity. Action over analysis paralysis. Real growth over staged appearances.</div></div>
+      <div class="about-card reveal"><div class="card-icon">&#x1F3AF;</div><div class="card-title">What I Do</div><div class="card-desc">Orchestrate digital ecosystems. Build venture programs. Connect startups with the right partners, mentors, and institutions to accelerate real growth.</div></div>
+      <div class="about-card reveal"><div class="card-icon">&#x1F4A1;</div><div class="card-title">What Drives Me</div><div class="card-desc">The moment a founder sees the full picture. When ecosystem pieces connect, when partnerships unlock what solo effort never could. That's the signal I chase.</div></div>
+      <div class="about-card reveal"><div class="card-icon">&#x1F30F;</div><div class="card-title">Who I Am</div><div class="card-desc">A connector at heart. I think in systems, operate through relationships, and believe the strongest competitive advantage any founder can have is the right room to be in.</div></div>
+      <div class="about-card reveal"><div class="card-icon">&#x26A1;</div><div class="card-title">My Values</div><div class="card-desc">Ecosystems over silos. Long-term trust over short-term deals. Depth of impact over breadth of noise. Build slow, build right, build to last.</div></div>
     </div>
   </div>
 </section>
@@ -401,8 +509,16 @@ footer { padding:36px 48px; border-top:1px solid var(--glass-border); display:fl
   <div class="inner">
     <p class="s-label reveal">Career Timeline</p>
     <h2 class="s-title reveal">10+ Years of Building</h2>
-    <p class="s-desc reveal">From solar energy to startup ecosystems. Every step shaped the operator I am today.</p>
+    <p class="s-desc reveal">From solar panels to digital ecosystems. Every role added a layer. Every failure sharpened the lens.</p>
     <div class="timeline">
+      <div class="titem">
+        <div class="tdot"></div>
+        <div class="tdate">Jul 2026 &mdash; Present</div>
+        <div class="ttitle">Partnership Manager</div>
+        <div class="tco">Garuda Spark Innovation Hub (GSIH) &mdash; Malang</div>
+        <div class="tdesc">Developing and maintaining strategic partnerships across GSIH's digital innovation ecosystem, spanning corporations, universities, startups, and communities. Connecting key stakeholders to drive collaborative programs that strengthen Indonesia's digital economy, with a focused regional impact in Malang and beyond.</div>
+        <div class="tags"><span class="tag">Partnership Development</span><span class="tag">Ecosystem Strategy</span><span class="tag">Digital Innovation</span><span class="tag">Stakeholder Relations</span></div>
+      </div>
       <div class="titem">
         <div class="tdot"></div>
         <div class="tdate">Aug 2025 &mdash; Present</div>
@@ -695,6 +811,55 @@ footer { padding:36px 48px; border-top:1px solid var(--glass-border); display:fl
     observer.observe(el);
     el.style.transitionDelay = (i % 4 * 80) + "ms";
   });
+
+  // Floating particles
+  var pw = document.getElementById("particlesWrap");
+  if (pw) {
+    for (var p = 0; p < 22; p++) {
+      var dot = document.createElement("div");
+      dot.className = "p-dot";
+      var size = 2 + Math.random() * 3;
+      dot.style.cssText = [
+        "left:" + (Math.random()*100) + "%",
+        "width:" + size + "px",
+        "height:" + size + "px",
+        "background:" + (Math.random() > 0.5 ? "rgba(0,212,255,0.7)" : "rgba(56,189,248,0.5)"),
+        "animation-duration:" + (8 + Math.random()*14) + "s",
+        "animation-delay:" + (Math.random()*12) + "s"
+      ].join(";");
+      pw.appendChild(dot);
+    }
+  }
+
+  // Animated stat counters
+  function animateCounter(el, target) {
+    var start = 0; var duration = 1800;
+    var startTime = null;
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(ease * target);
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+  }
+
+  var statsObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (!e.isIntersecting) return;
+      var nums = e.target.querySelectorAll(".count-target");
+      nums.forEach(function(n) {
+        animateCounter(n, parseInt(n.dataset.target));
+      });
+      statsObserver.unobserve(e.target);
+    });
+  }, { threshold: 0.5 });
+
+  var statsEl = document.querySelector(".hero-stats");
+  if (statsEl) statsObserver.observe(statsEl);
+
 })();
 
 // ── GALLERY ──────────────────────────────────────────
